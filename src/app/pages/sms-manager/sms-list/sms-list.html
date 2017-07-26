@@ -1,0 +1,38 @@
+<div class="row">
+  <!-- <ba-card cardTitle="Daftar Singkatan" baCardClass="with-scroll" class="smart-table-container">
+    <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+  </ba-card> -->
+  
+  <ba-card class="col-md-12" cardTitle="Parameter Tarif" baCardClass="panel-group">
+    <div class="row">
+      <table class="table">
+        <thead>
+        <tr >
+          <th class="table-id">#</th>
+          <th >Singkatan</th>
+          <th >Arti</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let sms of smsList; let in = index">
+          <td class="table-id">{{in+1}}</td>
+          <td>{{sms.undefine_word}}</td>
+          <td>
+            <form class="row form-inline" #f="ngForm" (ngSubmit)="submitForm(sms)" ngNativeValidate>
+              <div class="form-group col-sm-3 col-xs-6">
+                <input type="text" class="form-control" name="word-{{in}}" [(ngModel)]="sms.word" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Ok</button>
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </ba-card>
+</div>
