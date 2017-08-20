@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 import {TrafficChartService} from './trafficChart.service';
-import * as Chart from 'chart.js';
+// import * as Chart from 'chart.js';
 
 @Component({
   selector: 'traffic-chart',

@@ -18,10 +18,11 @@ export const routes: Routes = [
     path: 'pages',
     component: Pages,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'virtualmarket', pathMatch: 'full' },
+      { path: 'virtualmarket',  loadChildren: './virtualmarket/virtualmarket.module#VirtualmarketModule' },
       { path: 'sms-manager',  loadChildren: './sms-manager/sms-manager.module#SmsManagerModule' },
       { path: 'fare-manager',  loadChildren: './fare-manager/fare-manager.module#FareManagerModule' },
-      { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+      // { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
       // { path: 'editors', loadChildren: './editors/editors.module#EditorsModule' },
       // { path: 'components', loadChildren: './components/components.module#ComponentsModule' },
       // { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },

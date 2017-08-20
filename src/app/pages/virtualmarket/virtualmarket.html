@@ -1,0 +1,26 @@
+<div>
+	<ba-card class="col-md-12" cardTitle="" baCardClass="horizontal-tabs panel-group" style="margin-bottom:75px">
+		<vm-filter></vm-filter>
+
+		<ngb-tabset [destroyOnHide]="false" active="active">
+			<ngb-tab title="Overview">
+				<ng-template ngbTabContent>
+					<vm-overview></vm-overview>
+				</ng-template>
+			</ngb-tab>
+			<ngb-tab title="Transaksi">
+				<ng-template ngbTabContent>
+					<vm-transaction></vm-transaction>
+				</ng-template>
+			</ngb-tab>
+		  <!-- <ngb-tab title="Produk">
+		    <vm-product></vm-product>
+		  </ngb-tab>
+		  <ngb-tab title="Garendong">
+				<vm-shopper></vm-shopper>	    
+		  </ngb-tab> -->
+		</ngb-tabset>  
+
+	</ba-card>
+	
+</div>

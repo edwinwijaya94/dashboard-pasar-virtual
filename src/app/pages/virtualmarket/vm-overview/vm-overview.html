@@ -1,0 +1,141 @@
+<!-- <div class="row"> -->
+  <!-- <div class="row col-md-12" ba-panel ba-panel-title="Data Transaksi" ba-panel-class="panel-group"> -->
+
+    <!-- STATS -->
+    <div class="row" >
+      
+      <!-- TRANSAKSI -->
+      <div class="col-md-4 pv-stats" style="height:460px">
+        <div class="row pie-charts" style="height:150px; padding-left:10px">
+          <div class="col-md-6 pv-stats">
+            <div class="">
+              <div class="description">
+                <div>{{ stats.transaction_count.description }}</div><br>
+                <div class="description-stats" >{{stats.transaction_count.value}}</div><br>
+                <div >
+                  <i class="{{stats.transaction_count.icon}}" [style.color]="stats.transaction_count.iconColor"></i>
+                  <span>{{stats.transaction_count.change}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 pv-stats">
+            <div class="">
+              <div class="description">
+                <div>{{ stats.unique_buyers.description }}</div><br>
+                <div class="description-stats">{{stats.unique_buyers.value}}</div><br>
+                <div >
+                  <i class="{{stats.unique_buyers.icon}}" [style.color]="stats.unique_buyers.iconColor"></i>
+                  <span>{{stats.unique_buyers.change}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- STATUS TRANSAKSI -->
+        <ba-card class="col-md-12" cardTitle="Status Transaksi" baCardClass="pv-panel" style="height:250px; margin-bottom:25px">
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div id="vmOverviewTransactionStatus" class="pv-chart" style="height:250px"></div>
+            </div>
+          </div>
+        </ba-card>
+
+      </div>
+
+      <!-- PRODUK -->
+      <div class="col-md-5 pv-stats" style="height:460px; border-left: 1px solid gray">
+        <div class="row pie-charts" style="height:150px; padding-left:20px">
+          <div class="col-md-6 pv-stats">
+            <div class="">
+              <div class="description">
+                <div>{{ stats.availability.description }}</div><br>
+                <div class="description-stats">{{stats.availability.value}}</div><br>
+                <div >
+                  <i class="{{stats.availability.icon}}" [style.color]="stats.availability.iconColor"></i>
+                  <span>{{stats.availability.change}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 pv-stats">
+            <div class="">
+              <div class="description">
+                <div>{{ stats.fluctuation.description }}</div><br>
+                <div class="description-stats">
+                  <i class="{{stats.fluctuation.icon}}" [style.color]="stats.fluctuation.iconColor" *ngIf="stats.fluctuation.value != '0%'"></i>
+                  <span class="description-stats">{{stats.fluctuation.value}}</span><br>
+                  <!-- <span>{{stats.fluctuation.change}}</span> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK POPULER-->
+        <ba-card class="col-md-12" cardTitle="Produk Populer" baCardClass="pv-panel" style="height:250px; margin-bottom:25px">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table" [mfData]="productList.product" #mf="mfDataTable" [mfRowsOnPage]="5">
+                <thead>
+                <tr class="">
+                  <th class="table-id">#</th>
+                  <th>Nama</th>
+                  <th style="text-align:right">Ketersediaan(%)</th>
+                  <th style="text-align:right">Harga(Rp)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let product of mf.data; let in = index">
+                  <td class="table-id">{{in+1+(productPageIndex-1)*productPageSize}}</td>
+                  <td>{{product.name}}</td>
+                  <td align="right">
+                    {{formatNumber(product.availability)}}
+                    &nbsp;
+                    <i class="{{getArrowIcon(product.availability_change)}}" [style.color]="getArrowColor(product.availability_change)" *ngIf="product.availability_change != 0"></i>
+                  </td>
+                  <td align="right">
+                    {{formatNumber(product.avg_price)}}
+                    &nbsp;
+                    <i class="{{getArrowIcon(product.price_change)}}" [style.color]="getArrowColor(product.price_change*(-1))" *ngIf="product.price_change != 0"></i>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </ba-card>
+
+      </div>
+
+      <!-- RATING DAN FEEDBACK -->
+      <div class="col-md-3 pv-stats" style="height:460px; border-left: 1px solid gray">
+        <div class="col-md-12 pie-charts" style="height:150px; padding-left:20px">
+          <div class="col-md-12 pv-stats">
+            <div class="">
+              <div class="description">
+                <div>{{ stats.avg_rating.description }}</div><br>
+                <div class="description-stats">{{stats.avg_rating.value}}</div><br>
+                <div>
+                  <i class="{{stats.avg_rating.icon}}" [style.color]="stats.avg_rating.iconColor"></i>
+                  <span>{{stats.avg_rating.change}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Feedback Reason -->
+        <ba-card class="col-md-12" cardTitle="Ulasan" baCardClass="pv-panel" style="height:250px; margin-bottom:25px">
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div id="vmOverviewFeedbackReason" class="pv-chart" style="height:250px"></div>
+            </div>
+          </div>
+        </ba-card>
+      
+      </div>      
+    
+    </div>
+
+  <!-- </div> -->
+<!-- </div> -->
