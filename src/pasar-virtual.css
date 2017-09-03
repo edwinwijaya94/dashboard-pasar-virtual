@@ -83,7 +83,7 @@
   height: 125%;
 }
 .pv-product-trend-modal .modal-dialog{
-  bottom: 50px;
+  top: 100px;
 }
 
 .pv-product-modal {
@@ -182,3 +182,8 @@
     margin-top: 100px; }
   .pie-charts .angular .chart {
     margin-top: 0; }
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: #fff;
+  background-color: #209e91;
+}

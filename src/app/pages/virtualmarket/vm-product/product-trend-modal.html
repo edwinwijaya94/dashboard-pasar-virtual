@@ -1,26 +1,26 @@
-<div class="modal-content" ng-controller="vmProductTrendCtrl">
+<div class="modal-content">
   <div class="modal-header">
-    <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
-      <em class="ion-ios-close-empty sn-link-close"></em>
-    </button>
     <h4 class="modal-title">Produk: {{selectedProduct.name}}</h4>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
   <div class="modal-body" style="padding-top:0px">
-  	<div class="col-md-12" style="padding-bottom:15px">
+  	<div class="row col-md-12" style="padding-bottom:15px">
   		<div class="col-md-6">
   			Jumlah Permintaan: {{formatNumber(selectedProduct.sums)}} {{selectedProduct.unit}}
-        <span ng-show="selectedProduct.sum_change != 0">
+        <span *ngIf="selectedProduct.sum_change != 0">
     			(
-  					<i class="{{getArrowIcon(selectedProduct.sum_change)}}" style="color:{{getArrowColor(selectedProduct.sum_change)}}" ng-show="selectedProduct.sum_change != 0"></i>
+  					<i class="{{getArrowIcon(selectedProduct.sum_change)}}" [style.color]="getArrowColor(selectedProduct.sum_change)" *ngIf="selectedProduct.sum_change != 0"></i>
   					{{formatNumber(selectedProduct.sum_change)}}
   				)
         </span>
   		</div>
   		<div class="col-md-6">
 				Harga Rata-Rata: {{formatPrice(selectedProduct.avg_price)}}/{{selectedProduct.unit}}
-        <span ng-show="selectedProduct.price_change != 0">
+        <span *ngIf="selectedProduct.price_change != 0">
   				(
-  					<i class="{{getArrowIcon(selectedProduct.price_change)}}" style="color:{{getArrowColor(selectedProduct.price_change*(-1))}}" ng-show="selectedProduct.price_change != 0"></i>
+  					<i class="{{getArrowIcon(selectedProduct.price_change)}}" [style.color]="getArrowColor(selectedProduct.price_change*(-1))" *ngIf="selectedProduct.price_change != 0"></i>
   					{{formatNumber(selectedProduct.price_change)}}
   				)
         </span>

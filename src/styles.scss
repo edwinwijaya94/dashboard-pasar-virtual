@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*overwrite Glyphicons to FontAwesome*/
+.glyphicon {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-triangle-top:before {
+  content: "\f0d8";
+}
+.glyphicon-triangle-bottom:before {
+  content: "\f0d7";
+}
+

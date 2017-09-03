@@ -14,7 +14,7 @@ import { VmFilterComponent, VmFilterService } from './vm-filter';
 import { vmHelper } from './vmHelper';
 import { VmOverviewComponent, VmOverviewService } from './vm-overview';
 import { VmTransactionComponent, VmTransactionService } from './vm-transaction';
-// import { VmProductComponent, VmProductService } from './vm-product';
+import { VmProductComponent, VmProductTrendComponent, VmProductService, VmProductFilterPipe } from './vm-product';
 // import { VmShopperComponent, VmShopperService } from './vm-shopper';
 
 @NgModule({
@@ -33,7 +33,9 @@ import { VmTransactionComponent, VmTransactionService } from './vm-transaction';
     VmFilterComponent,
     VmOverviewComponent,
     VmTransactionComponent,
-    // VmProductComponent,
+    VmProductComponent,
+    VmProductTrendComponent,
+    VmProductFilterPipe,
     // VmShopperComponent,
   ],
   providers: [
@@ -41,8 +43,9 @@ import { VmTransactionComponent, VmTransactionService } from './vm-transaction';
     VmFilterService,
     VmOverviewService,
     VmTransactionService,
-    // VmProductService,
+    VmProductService,
     // VmShopperService,
-  ]
+  ],
+  entryComponents: [VmProductTrendComponent]
 })
 export class VirtualmarketModule {}

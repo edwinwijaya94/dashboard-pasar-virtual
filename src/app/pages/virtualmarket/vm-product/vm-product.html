@@ -1,7 +1,7 @@
-<div class="row" ng-controller="vmProductCtrl">
+<!-- <div class="row" ng-controller="vmProductCtrl"> -->
   <!-- <div class="row col-md-12" ba-panel ba-panel-title="Data Produk" ba-panel-class="panel-group"> -->
 
-    <div class="row pv-stats" style="padding-left:20px">
+    <div class="col-md-12 pv-stats">
 
       <!-- availability rates -->
       <div class="row pie-charts pv-stats">
@@ -9,10 +9,10 @@
           <div class="row pv-stats" style="margin-bottom:30px">
             <div class="">
               <div class="description">
-                <div>{{ ::stats.availability.description }}</div><br>
-                <div class="description-stats" ng-bind="stats.availability.value"></div><br>
+                <div>{{ stats.availability.description }}</div><br>
+                <div class="description-stats">{{stats.availability.value}}</div><br>
                 <div >
-                    <i class="{{stats.availability.icon}}" style="color:{{stats.availability.iconColor}}"></i>
+                    <i class="{{stats.availability.icon}}" [style.color]="stats.availability.iconColor"></i>
                     <span>{{stats.availability.change}}</span>
                 </div>
               </div>
@@ -21,60 +21,60 @@
           <div class="row pv-stats">
             <div class="">
               <div class="description">
-                <div>{{ ::stats.fluctuation.description }}</div><br>
+                <div>{{ stats.fluctuation.description }}</div><br>
                 <div class="description-stats">
-                  <i class="{{stats.fluctuation.icon}}" style="color:{{stats.fluctuation.iconColor}}" ng-show="stats.fluctuation.value != '0%'"></i>
-                  <span class="description-stats" ng-bind="stats.fluctuation.value"></span><br>
-                  <!-- <span>{{stats.fluctuation.change}}</span> -->
+                  <i class="{{stats.fluctuation.icon}}" [style.color]="stats.fluctuation.iconColor" *ngIf="stats.fluctuation.value != '0%'"></i>
+                  <span class="description-stats">{{stats.fluctuation.value}}</span><br>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <!-- Availability Trend -->
-        <div class="col-md-8"
-           ba-panel
-           ba-panel-title="Tren Ketersediaan"
-           ba-panel-class="pv-panel" style="height:300px; margin-bottom:10px">
-          <div class="row">
-            <div class="col-lg-12 col-md-12">
-              <div id="vmProductAvailability" class="pv-chart" style="height:200px"></div>
-              <!-- loading / no data handler -->
-              <div class="pv-chart-medium-overlay" ng-show="loading || noData">
-                <div class="pv-chart-no-data" ng-show="noData">Tidak Ada Data</div>
-                <div class="pv-chart-loading" ng-show="loading"></div>
+        <div class="col-md-9" style="height:300px; margin-bottom:10px">
+          <ba-card class="col-md-6" cardTitle="Tren Ketersediaan" baCardClass="pv-panel" >
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <div id="vmProductAvailability" class="pv-chart" style="height:200px"></div>
               </div>
             </div>
-          </div>
+          </ba-card>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-12"
-             ba-panel
-             ba-panel-title="Produk"
-             ba-panel-class="pv-panel" style="">
+        <ba-card class="col-md-12" cardTitle="Produk" baCardClass="pv-panel" style="">
           <div class="row">
             <div>
-              <table class="table" st-table="productList.product" st-safe-src="updatedProductList">
+              <table class="table" [mfData]="productList.product | productFilter : nameQuery:categoryQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
                 <thead>
                 <tr class="sortable ">
                   <th class="table-id">#</th>
-                  <th st-sort="name">Produk</th>
-                  <th st-sort="category">Kategori</th>
+                  <th>
+                    <mfDefaultSorter by="name">Produk</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="category">Kategori</mfDefaultSorter>
+                  </th>
                   <!-- <th st-sort="sorter.count" st-sort-default="reverse" style="text-align:right">#Transaksi</th> -->
-                  <th style="text-align:right">#Permintaan</th>
-                  <th st-sort="sorter.avgPrice" style="text-align:right">Harga(Rp)</th>
-                  <th st-sort="sorter.availability" style="text-align:right">Ketersediaan(%)</th>
+                  <th style="text-align:right">
+                    #Permintaan
+                  </th>
+                  <th style="text-align:right">
+                    <mfDefaultSorter [by]="sorter.avgPrice">Harga(Rp)</mfDefaultSorter>
+                  </th>
+                  <th style="text-align:right">
+                    <mfDefaultSorter [by]="sorter.availability">Ketersediaan(%)</mfDefaultSorter>
+                  </th>
                   <th >Tren</th>
                 </tr>
                 <tr>
                   <th></th>
                   <th>
-                    <input st-search="name" placeholder="Cari" class="input-sm form-control search-input" type="search"/>
+                    <input placeholder="Cari" class="input-sm form-control search-input" type="search" [(ngModel)]="nameQuery"/>
                   </th>
                   <th>
-                    <input st-search="category" placeholder="Cari" class="input-sm form-control search-input" type="search"/>
+                    <input placeholder="Cari" class="input-sm form-control search-input" type="search" [(ngModel)]="categoryQuery"/>
                   </th>
                   <!-- <th></th> -->
                   <th></th>
@@ -84,29 +84,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="product in productList.product">
-                  <td class="table-id">{{$index+1+(productPageIndex-1)*productPageSize}}</td>
+                <tr *ngFor="let product of mf.data; let in = index">
+                  <td class="table-id">{{in+1+(mf.activePage-1)*productPageSize}}</td>
                   <td>{{product.name}}</td>
                   <td>{{product.category}}</td>
                   <!-- <td style="text-align:right">{{product.count}}</td> -->
                   <td style="text-align:right">
                     {{product.sums}} {{product.unit}}
-                    &nbsp
-                    <i class="{{getArrowIcon(product.sum_change)}}" style="color:{{getArrowColor(product.sum_change)}}" ng-show="product.sum_change != 0"></i>
+                    &nbsp;
+                    <i class="{{getArrowIcon(product.sum_change)}}" [style.color]="getArrowColor(product.sum_change)" *ngIf="product.sum_change != 0"></i>
                   </td>
                   <td style="text-align:right">
                     {{formatNumber(product.avg_price)}}
-                    &nbsp
-                    <i class="{{getArrowIcon(product.price_change)}}" style="color:{{getArrowColor(product.price_change*(-1))}}" ng-show="product.price_change != 0"></i>
+                    &nbsp;
+                    <i class="{{getArrowIcon(product.price_change)}}" [style.color]="getArrowColor(product.price_change*(-1))" *ngIf="product.price_change != 0"></i>
                   </td>
                   <td style="text-align:right">
                     {{formatNumber(product.availability)}}
-                    &nbsp
-                    <i class="{{getArrowIcon(product.availability_change)}}" style="color:{{getArrowColor(product.availability_change)}}" ng-show="product.availability_change != 0"></i>
+                    &nbsp;
+                    <i class="{{getArrowIcon(product.availability_change)}}" [style.color]="getArrowColor(product.availability_change)" *ngIf="product.availability_change != 0"></i>
                   </td>
                   <td>
                     <div class="buttons">
-                      <button class="btn btn-primary editable-table-button btn-xs" ng-click="viewTrend(product)">Lihat</button>
+                      <button class="btn btn-primary editable-table-button btn-xs" (click)="viewTrend(product)">Lihat</button>
                     </div>
                   </td> 
                 </tr>
@@ -114,7 +114,8 @@
                 <tfoot>
                 <tr>
                   <td colspan="6" class="text-center">
-                    <div st-pagination="" st-items-by-page="5" st-displayed-pages="5" st-page-change="changeProductPage(newPage)"></div>
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    <!-- <div st-pagination="" st-items-by-page="5" st-displayed-pages="5" st-page-change="changeProductPage(newPage)"></div> -->
                   </td>
                 </tr>
                 </tfoot>
@@ -122,10 +123,10 @@
 
             </div>
           </div>
-        </div>
+        </ba-card>
 
       </div>
     </div>
 
   <!-- </div> -->
-</div>
+<!-- </div> -->
