@@ -270,39 +270,6 @@ export class VmProductComponent {
           activeModal.componentInstance.productTrendData = data;
 
         });
-
-
-      // $http.get('/api/virtualmarket/product?type=trend&start_date='+startDate+'&end_date='+endDate+'&product_id='+product.id)
-      //   .then(function(res) {
-      //     var data = res.data.data;
-      //     if(data.trend.granularity=='day') {
-      //       for(var i=0; i<data.trend.length-1; i++) {
-      //         var date = moment(data.trend[i+1].date, 'YYYY-MM-DD');
-      //         if(date.isAfter(moment(),'day'))
-      //           data.trend[i].dashLength = 2;  
-      //         else
-      //           data.trend[i].dashLength = 0;  
-      //       }
-      //     } else {
-      //       for(var i=0; i<data.trend.length-1; i++) {
-      //         data.trend[i].dashLength = 0;  
-      //       }
-      //     }
-      //     this.productTrendData = data;
-      //   })
-      //   .finally(function() {
-      //     // open edit modal
-      //     var page = 'app/pages/virtualmarket/vmProduct/productTrendModal.html';
-      //     var size = 'lg';
-      //     $rootScope.productTrendModalInstance = $uibModal.open({
-      //       animation: true,
-      //       templateUrl: page,
-      //       size: size,
-      //       scope: $scope,
-      //       windowClass: 'pv-product-trend-modal'
-      //     });
-      //   });    
-
     };
 
     public getArrowIcon(value: any) {

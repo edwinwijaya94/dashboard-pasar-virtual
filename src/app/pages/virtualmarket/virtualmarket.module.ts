@@ -15,7 +15,7 @@ import { vmHelper } from './vmHelper';
 import { VmOverviewComponent, VmOverviewService } from './vm-overview';
 import { VmTransactionComponent, VmTransactionService } from './vm-transaction';
 import { VmProductComponent, VmProductTrendComponent, VmProductService, VmProductFilterPipe } from './vm-product';
-// import { VmShopperComponent, VmShopperService } from './vm-shopper';
+import { VmShopperComponent, VmShopperService, VmShopperFilterPipe } from './vm-shopper';
 
 @NgModule({
   imports: [
@@ -36,7 +36,8 @@ import { VmProductComponent, VmProductTrendComponent, VmProductService, VmProduc
     VmProductComponent,
     VmProductTrendComponent,
     VmProductFilterPipe,
-    // VmShopperComponent,
+    VmShopperComponent,
+    VmShopperFilterPipe,
   ],
   providers: [
     vmHelper,
@@ -44,7 +45,7 @@ import { VmProductComponent, VmProductTrendComponent, VmProductService, VmProduc
     VmOverviewService,
     VmTransactionService,
     VmProductService,
-    // VmShopperService,
+    VmShopperService,
   ],
   entryComponents: [VmProductTrendComponent]
 })

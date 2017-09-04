@@ -1,11 +1,11 @@
-<div class="row" ng-controller="vmShopperCtrl">
+<!-- <div class="row" ng-controller="vmShopperCtrl"> -->
   <!-- <div class="row col-md-12" ba-panel ba-panel-title="Data Petugas Garendong" ba-panel-class="panel-group"> -->
 
     <!-- STATS -->
     <!-- <div class="col-lg-12 col-md-12 col-sm-12"
          ba-panel
          ba-panel-class="pv-panel" style="height:150px"> -->
-      <div class="row" style="height:150px; padding-left:20px">
+      <div class="col-md-12" style="height:150px;">
         <div class="pie-charts row">
           <!-- Shopper Rating -->
           <div class="col-md-3" >
@@ -14,14 +14,11 @@
                 <div>
                   <span>{{stats.avgRating.description}}</span>
                 </div><br>
-                <div class="description-stats" ng-bind="stats.avgRating.value"></div><br>
+                <div class="description-stats">{{stats.avgRating.value}}</div><br>
                 <div>
-                  <i class="{{stats.avgRating.icon}}" style="color:{{stats.avgRating.iconColor}}"></i>
+                  <i class="{{stats.avgRating.icon}}" [style.color]="stats.avgRating.iconColor"></i>
                   <span>{{stats.avgRating.change}}</span>
                 </div>
-                <!-- <div>
-                  <span>dari {{stats.rating.transactions}} transaksi</span>
-                </div> -->
               </div>
             </div>
           </div>
@@ -32,9 +29,9 @@
                 <div>
                   <span>{{stats.feedback_count.description}}</span>
                 </div><br>
-                <div class="description-stats" ng-bind="stats.feedback_count.value"></div><br>
+                <div class="description-stats">{{stats.feedback_count.value}}</div><br>
                 <div>
-                  <i class="{{stats.feedback_count.icon}}" style="color:{{stats.feedback_count.iconColor}}"></i>
+                  <i class="{{stats.feedback_count.icon}}" [style.color]="stats.feedback_count.iconColor"></i>
                   <span>{{stats.feedback_count.change}}</span>
                 </div>
               </div>
@@ -47,9 +44,9 @@
                 <div>
                   <span>{{stats.shopperCount.description}}</span>
                 </div><br>
-                <div class="description-stats" ng-bind="stats.shopperCount.value"></div><br>
+                <div class="description-stats">{{stats.shopperCount.value}}</div><br>
                 <div>
-                  <i class="{{stats.shopperCount.icon}}" style="color:{{stats.shopperCount.iconColor}}"></i>
+                  <i class="{{stats.shopperCount.icon}}" [style.color]="stats.shopperCount.iconColor"></i>
                   <span>{{stats.shopperCount.change}}</span>
                 </div>
               </div>
@@ -62,9 +59,9 @@
                 <div>
                   <span>{{stats.transactionPerShopper.description}}</span>
                 </div><br>
-                <div class="description-stats" ng-bind="stats.transactionPerShopper.value"></div><br>
+                <div class="description-stats">{{stats.transactionPerShopper.value}}</div><br>
                 <div>
-                  <i class="{{stats.transactionPerShopper.icon}}" style="color:{{stats.transactionPerShopper.iconColor}}"></i>
+                  <i class="{{stats.transactionPerShopper.icon}}" [style.color]="stats.transactionPerShopper.iconColor"></i>
                   <span>{{stats.transactionPerShopper.change}}</span>
                 </div>
               </div>
@@ -76,75 +73,57 @@
       
       <div class="row pv-stats">
         <!-- Rating Trend -->
-        <div class="col-md-6"
-           ba-panel
-           ba-panel-title="Tren Rating"
-           ba-panel-class="pv-panel" style="height:250px; margin-bottom:10px">
+        <ba-card class="col-md-6" cardTitle="Tren Rating" baCardClass="pv-panel" style="height=250px; margin-bottom:10px">
           <div class="row">
             <div class="col-lg-12 col-md-12">
               <div id="vmShopperRating" class="pv-chart" style="height:200px"></div>
               <!-- loading / no data handler -->
-              <div class="pv-chart-medium-overlay" ng-show="loading || noData">
-                <div class="pv-chart-no-data" ng-show="noData">Tidak Ada Data</div>
-                <div class="pv-chart-loading" ng-show="loading"></div>
+              <div class="pv-chart-medium-overlay" *ngIf="loading || noData">
+                <div class="pv-chart-no-data" *ngIf="noData">Tidak Ada Data</div>
+                <div class="pv-chart-loading" *ngIf="loading"></div>
               </div>
             </div>
           </div>
-        </div>
+        </ba-card>
         <!-- Feedback Reason -->
-        <div class="col-md-6"
-           ba-panel
-           ba-panel-title="Ulasan"
-           ba-panel-class="pv-panel" style="height:250px">
+        <ba-card class="col-md-6" cardTitle="Ulasan" baCardClass="pv-panel" style="height:250px">
           <div class="row">
-            <!-- <div class="row">
-              <div class="col-md-2 col-md-offset-6" style="text-align:right">Tampilkan:</div>  
-              <div class="col-md-2">
-                <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="feedbackDistribution" value="distribution" ng-model="feedback.metric">
-                  <span>Perbandingan</span>
-                </label>
-              </div>
-              <div class="col-md-2">
-                <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="feedbackTrend" value="trend" ng-model="feedback.metric">
-                  <span>Tren</span>
-                </label>
-              </div>
-            </div> -->
             <div class="col-lg-12 col-md-12">
               <div id="vmFeedbackReason" class="pv-chart" style="height:200px"></div>
-              <!-- <div id="vmFeedbackTrend" class="pv-chart" style="height:200px" ng-show="feedback.metric=='trend'"></div> -->
-              <!-- loading / no data handler -->
-              <div class="pv-chart-small-overlay" ng-show="loading || noData">
-                <div class="pv-chart-no-data" ng-show="noData">Tidak Ada Data</div>
-                <div class="pv-chart-loading" ng-show="loading"></div>
+              <div class="pv-chart-small-overlay" *ngIf="loading || noData">
+                <div class="pv-chart-no-data" *ngIf="noData">Tidak Ada Data</div>
+                <div class="pv-chart-loading" *ngIf="loading"></div>
               </div>
             </div>
           </div>
-        </div>
+        </ba-card>
       </div>
       <div class="row pv-stats">
         <!-- Top Shopper -->
-        <div class="col-md-12"
-           ba-panel
-           ba-panel-title="Petugas Garendong"
-           ba-panel-class="pv-panel table-panel" style="height:400px">
+        <ba-card class="col-md-12" cardTitle="Petugas Garendong" baCardClass="pv-panel" style="height:450px">
           <div>
-            <table class="table" st-table="shopperList.shopper" st-safe-src="updatedShopperList">
+            <table class="table" [mfData]="shopperList.shopper | shopperFilter : nameQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
               <thead>
               <tr class="sortable ">
                 <th class="table-id">#</th>
-                <th st-sort="name">Nama</th>
-                <th st-sort="sorter.orders" style="text-align:right">#Transaksi</th>
-                <th st-sort="sorter.rating" st-sort-default="reverse" style="text-align:right">Rating</th>
+                <th>
+                  <mfDefaultSorter by="name">Nama</mfDefaultSorter>
+                </th>
+                <th style="text-align:right">
+                  <mfDefaultSorter [by]="sorter.orders">#Transaksi</mfDefaultSorter>
+                </th>
+                <th style="text-align:right">
+                  <mfDefaultSorter [by]="sorter.rating">Rating</mfDefaultSorter>
+                </th>
                 <th></th>
-                <th st-sort="sorter.feedbacks" style="text-align:right">#Ulasan</th>
+                <th style="text-align:right">
+                  <mfDefaultSorter [by]="sorter.feedbacks">#Ulasan</mfDefaultSorter>
+                </th>
               </tr>
               <tr>
                 <th></th>
                 <th>
-                  <input st-search="name" placeholder="Cari Garendong" class="input-sm form-control search-input" type="search"/>
+                  <input placeholder="Cari Garendong" class="input-sm form-control search-input" type="search" [(ngModel)]="nameQuery"/>
                 </th>
                 <th></th>
                 <th></th>
@@ -153,43 +132,36 @@
               </tr>
               </thead>
               <tbody>
-              <tr ng-repeat="shopper in shopperList.shopper">
-                <td class="table-id">{{$index+1+(shopperPageIndex-1)*shopperPageSize}}</td>
+              <tr *ngFor="let shopper of mf.data; let in = index">
+                <td class="table-id">{{in+1+(mf.activePage-1)*shopperPageSize}}</td>
                 <td>
                   {{shopper.name}}
-                  <!-- {{getRandomName()}} -->
                 </td>
                 <td class="" style="text-align:right">
                   {{shopper.orders}}
-                  <!-- &nbsp
-                  <i class="{{getArrowIcon(shopper.orders_change)}}" style="color:{{getArrowColor(shopper.orders_change)}}"></i>
-                  <span>{{shopper.orders_change}}</span> -->
                 </td>
                 <td class="" style="text-align:right">
                   {{formatRating(shopper.rating)}}
                 </td>
                 <td style="width:50px">
-                  <i class="{{getArrowIcon(shopper.rating_change)}}" style="color:{{getArrowColor(shopper.rating_change)}}" ng-show="shopper.rating_change != 0"></i>
-                  <span ng-show="shopper.rating_change != 0">{{formatRatingChange(shopper.rating_change)}}</span>
+                  <i class="{{getArrowIcon(shopper.rating_change)}}" [style.color]="getArrowColor(shopper.rating_change)" *ngIf="shopper.rating_change != 0"></i>
+                  <span *ngIf="shopper.rating_change != 0">{{formatRatingChange(shopper.rating_change)}}</span>
                 </td>
                 <td class="" style="text-align:right">
                   {{shopper.feedbacks}}
-                  <!-- &nbsp
-                  <i class="{{getArrowIcon(shopper.rating_change)}}" style="color:{{getArrowColor(shopper.rating_change)}}" ng-show="shopper.rating_change != 0"></i>
-                  <span ng-show="shopper.rating_change != 0">{{formatRating(shopper.rating_change)}}</span> -->
                 </td>
               </tr>
               </tbody>
               <tfoot>
               <tr>
                 <td colspan="6" class="text-center">
-                  <div st-pagination="" st-items-by-page="5" st-displayed-pages="5" st-page-change="changeShopperPage(newPage)"></div>
+                  <mfBootstrapPaginator [rowsOnPageSet]="[5]"></mfBootstrapPaginator>
                 </td>
               </tr>
               </tfoot>
             </table>
           </div>
-        </div>
+        </ba-card>
       </div>
       
       
@@ -200,4 +172,4 @@
 
 
   <!-- </div> -->
-</div>
+<!-- </div> -->
