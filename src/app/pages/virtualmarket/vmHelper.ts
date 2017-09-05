@@ -27,6 +27,8 @@ export class vmHelper {
     	end : moment()
     };
 
+    public periodInfo = '';
+
     constructor() {}
     ngOnInit() {}
 

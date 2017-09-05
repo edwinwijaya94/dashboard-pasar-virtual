@@ -5,21 +5,33 @@
 		<ngb-tabset [destroyOnHide]="false" active="active">
 			<ngb-tab title="Overview">
 				<ng-template ngbTabContent>
+					<div class="row" style="padding-bottom:20px">
+			  		<span>{{vmHelper.periodInfo}}</span> 
+			  	</div>
 					<vm-overview></vm-overview>
 				</ng-template>
 			</ngb-tab>
 			<ngb-tab title="Transaksi">
 				<ng-template ngbTabContent>
+					<div class="row" style="padding-bottom:20px">
+			  		<span>{{vmHelper.periodInfo}}</span> 
+			  	</div>
 					<vm-transaction></vm-transaction>
 				</ng-template>
 			</ngb-tab>
 			<ngb-tab title="Produk">
 				<ng-template ngbTabContent>
+					<div class="row" style="padding-bottom:20px">
+			  		<span>{{vmHelper.periodInfo}}</span> 
+			  	</div>
 					<vm-product></vm-product>
 				</ng-template>
 			</ngb-tab>
 			<ngb-tab title="Garendong">
 				<ng-template ngbTabContent>
+					<div class="row" style="padding-bottom:20px">
+			  		<span>{{vmHelper.periodInfo}}</span> 
+			  	</div>
 					<vm-shopper></vm-shopper>
 				</ng-template>
 			</ngb-tab>

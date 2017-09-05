@@ -28,6 +28,8 @@ export class opHelper {
       label: '7 Hari'
     };
 
+    public periodInfo = '';
+    
     constructor() {}
     ngOnInit() {}
 
