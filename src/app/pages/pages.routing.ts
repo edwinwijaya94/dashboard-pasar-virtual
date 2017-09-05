@@ -20,6 +20,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'virtualmarket', pathMatch: 'full' },
       { path: 'virtualmarket',  loadChildren: './virtualmarket/virtualmarket.module#VirtualmarketModule' },
+      { path: 'operational',  loadChildren: './operational/operational.module#OperationalModule' },
       { path: 'sms-manager',  loadChildren: './sms-manager/sms-manager.module#SmsManagerModule' },
       { path: 'fare-manager',  loadChildren: './fare-manager/fare-manager.module#FareManagerModule' },
       // { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },

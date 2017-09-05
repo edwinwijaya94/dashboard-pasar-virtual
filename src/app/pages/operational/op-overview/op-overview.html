@@ -1,0 +1,199 @@
+<!-- <div class="row" ng-controller="opOverviewCtrl"> -->
+  <!-- <div class="row col-md-12" ba-panel ba-panel-title="" ba-panel-class="panel-group"> -->
+
+    <!-- STATS -->
+    <div class="row" style="">
+      <div class="col-md-3">
+        <!-- CURRENT PRODUCT STATS -->
+        <ba-card class="col-md-12" cardTitle="Status Produk" baCardClass="pv-panel" style="height:800px">
+          <div class="row" style="padding-bottom:20px">
+            <div class="col-md-7">
+              <span >*Data real-time</span> 
+            </div>
+            <div class="col-md-5">
+              <button type="button" class="btn btn-primary" (click)="reloadProductStatus()" style="height:30px">Refresh</button>
+            </div>
+          </div>
+          <div class="pie-charts row" style="padding-top:10px; height:180px">
+            <div class="">
+              <!-- <div easypiechart class="chart" options="options" percent="stats.product_availability.percent"><span class="percent">{{stats.product_availability.percen}}</span> </div> -->
+              <div class="chart" [attr.data-rel]="options.barColor" [attr.data-percent]="stats.product_availability.percent">
+                <span class="percent"></span>
+              </div>
+              <div class="description">
+                <div>{{ stats.product_availability.description }}</div><br>
+                <div class="description-stats">{{stats.product_availability.value}}</div><br>
+                <div *ngIf="stats.product_availability.showChange">
+                  <i class="{{stats.product_availability.icon}}" [style.color]=
+                  "stats.product_availability.iconColor"></i>
+                  <span>{{stats.product_availability.change}}%</span>
+                </div>
+              </div>
+            </div>
+          </div>  
+        </ba-card>
+        <!-- TIDAK TERSEDIA -->
+        <ba-card class="col-md-12" cardTitle="Tidak Tersedia" baCardClass="pv-panel" style="">
+          <div class="row">
+            <!-- <div class="col-md-12"> -->
+              <table class="table" [mfData]="unavailableList.product" #mfUnavailable="mfDataTable" [mfRowsOnPage]="5">
+                <thead>
+                <tr class="sortable ">
+                  <th class="table-id">#</th>
+                  <th st-sort="name">Nama</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let product of mfUnavailable.data; let in = index">
+                  <td class="table-id">{{in+1+(mfUnavailable.activePage-1)*productPageSize}}</td>
+                  <td>{{product.name}}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan="6" class="text-center">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[]"></mfBootstrapPaginator>
+                    <!-- <div st-pagination="" st-items-by-page="5" st-displayed-pages="5" st-page-change="changeUnavailablePage(newPage)"></div> -->
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+
+            <!-- </div> -->
+          </div>
+        </ba-card>
+      </div>
+
+      
+
+      <!-- TRANSAKSI DAN PRODUK -->
+      <div class="col-md-9" style="height:800px; border-left: 1px solid gray">
+        <op-filter></op-filter>
+        <div class="row" style="padding-left:20px; padding-bottom:20px">
+          <span>{{periodInfo}}</span> 
+        </div>
+        <div class="row">
+          <div class = "col-md-4">
+            <div class="pie-charts col-md-12" style="margin-bottom:20px">
+              <div class="">
+                <div class="description">
+                  <div>{{ stats.transaction_count.description }}</div><br>
+                  <div class="description-stats">{{stats.transaction_count.value}}</div><br>
+                  <div *ngIf="stats.transaction_count.showChange">
+                    <i class="{{stats.transaction_count.icon}}" [style.color]="stats.transaction_count.iconColor"></i>
+                    <span>{{stats.transaction_count.change}}%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pie-charts col-md-12" style="margin-bottom:20px">
+              <div class="">
+                <div class="description">
+                  <div>{{ stats.fluctuation.description }}</div><br>
+                  <div class="description-stats">
+                    <i class="{{stats.fluctuation.icon}}" [style.color]="stats.fluctuation.iconColor" *ngIf="stats.fluctuation.value != '0%'"></i>
+                    <span class="description-stats">{{stats.fluctuation.value}}</span><br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- STATUS TRANSAKSI -->
+          <ba-card class="col-md-8" cardTitle="Status Transaksi" baCardClass="pv-panel" style="height:200px;">
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <div id="opTransactionStatus" class="admin-chart" style="height:180px"></div>
+              </div>
+            </div>
+          </ba-card>
+        </div>
+        <!-- PRODUK -->
+        <ba-card class="col-md-12" cardTitle="Produk" baCardClass="pv-panel" style="">
+          <div class="row">
+            <div>
+              <table class="table" [mfData]="productList.product | productFilter : nameQuery:categoryQuery" #mfProduct="mfDataTable" [mfRowsOnPage]="5">
+                <thead>
+                <tr class="sortable ">
+                  <th class="table-id">#</th>
+                  <th>
+                    <mfDefaultSorter by="name">Nama</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="category">Kategori</mfDefaultSorter>
+                  </th>
+                  <!-- <th st-sort="sorter.count" st-sort-default="reverse" style="text-align:right">#Transaksi</th> -->
+                  <th style="text-align:right">
+                    #Permintaan
+                  </th>
+                  <th style="text-align:right">
+                    <mfDefaultSorter [by]="sorter.avgPrice">Harga(Rp)</mfDefaultSorter>
+                  </th>
+                  <th style="text-align:right">
+                    <mfDefaultSorter [by]="sorter.availability">Ketersediaan(%)</mfDefaultSorter>
+                  </th>
+                  <th >Tren</th>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th>
+                    <input placeholder="Cari" class="input-sm form-control search-input" type="search" [(ngModel)]="nameQuery"/>
+                  </th>
+                  <th>
+                    <input placeholder="Cari" class="input-sm form-control search-input" type="search" [(ngModel)]="categoryQuery"/>
+                  </th>
+                  <!-- <th></th> -->
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let product of mfProduct.data; let in = index">
+                  <td class="table-id">{{in+1+(mfProduct.activePage-1)*productPageSize}}</td>
+                  <td>{{product.name}}</td>
+                  <td>{{product.category}}</td>
+                  <!-- <td style="text-align:right">{{product.count}}</td> -->
+                  <td style="text-align:right">
+                    {{product.sums}} {{product.unit}}
+                    &nbsp;
+                    <i class="{{getArrowIcon(product.sum_change)}}" [style.color]="getArrowColor(product.sum_change)" *ngIf="product.sum_change != 0"></i>
+                  </td>
+                  <td style="text-align:right">
+                    {{formatNumber(product.avg_price)}}
+                    &nbsp;
+                    <i class="{{getArrowIcon(product.price_change)}}" [style.color]="getArrowColor(product.price_change*(-1))" *ngIf="product.price_change != 0"></i>
+                  </td>
+                  <td style="text-align:right">
+                    {{formatNumber(product.availability)}}
+                    &nbsp;
+                    <i class="{{getArrowIcon(product.availability_change)}}" [style.color]="getArrowColor(product.availability_change)" *ngIf="product.availability_change != 0"></i>
+                  </td>
+                  <td>
+                    <div class="buttons">
+                      <button class="btn btn-primary editable-table-button btn-xs" (click)="viewTrend(product)">Lihat</button>
+                    </div>
+                  </td> 
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan="6" class="text-center">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[]"></mfBootstrapPaginator>
+                    <!-- <div st-pagination="" st-items-by-page="5" st-displayed-pages="5" st-page-change="changeProductPage(newPage)"></div> -->
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+
+            </div>
+          </div>
+        </ba-card>
+
+      </div>
+      
+    </div>
+      
+  <!-- </div> -->
+
+<!-- </div> -->

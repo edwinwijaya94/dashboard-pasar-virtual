@@ -16,6 +16,19 @@ export const PAGES_MENU = [
         }
       },
       {
+        path: 'operational',  // path for our page
+        data: { // custom menu declaration
+          menu: {
+            title: 'Operasional', // menu title
+            icon: 'ion-android-home', // menu icon
+            pathMatch: 'prefix', // use it if item children not displayed in menu
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
         path: 'sms-manager',  // path for our page
         data: { // custom menu declaration
           menu: {
